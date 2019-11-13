@@ -1,0 +1,30 @@
+//Arduino Code for using PLX-DAQ to get data from GUVA-S12SD UV sensor
+
+
+//always starts in line 0 and writes the thing written next to LABEL
+
+void setup() {
+
+Serial.begin(9600); // the bigger number the better
+
+Serial.println("CLEARDATA"); //clears up any data left from previous projects
+
+Serial.println("LABEL,Clocktime,time (s),sensorValue"); //always write LABEL, so excel knows the next things will be the names of the columns 
+
+Serial.println("RESETTIMER"); //resets timer to 0
+
+}
+
+void loop() {
+
+float sensorValue;
+
+sensorValue = analogRead(A0);
+
+Serial.print("DATA,TIME,TIMER,"); //writes the time in the first column A and the time since the measurements started in column B
+
+Serial.println(sensorValue); //be sure to add println to the last command so it knows to go into the next row on the second run
+
+delay(3000); //add a delay
+
+}
